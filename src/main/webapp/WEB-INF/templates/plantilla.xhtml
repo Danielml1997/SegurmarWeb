@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html" xmlns:ui="jakarta.faces.facelets" lang="es">
+<h:head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a1930" />
+    <title><ui:insert name="titulo">SEGURMAR | Soluciones tecnológicas</ui:insert></title>
+    <link rel="icon" href="#{request.contextPath}/assets/images/logo-segurmar.png" />
+    <link rel="stylesheet" href="#{request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="#{request.contextPath}/assets/css/portal.css" />
+</h:head>
+<h:body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-brand sticky-top shadow-sm">
+        <div class="container-fluid px-xl-5">
+            <a href="#{request.contextPath}/index.jsp" class="navbar-brand d-flex gap-2 align-items-center">
+                <img src="#{request.contextPath}/assets/images/logo-segurmar.png" class="app-logo" alt="SEGURMAR" />
+                <span class="brand-subtitle">SEGURMAR <small>SOLUCIONES TECNOLÓGICAS</small></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPublico" aria-controls="menuPublico" aria-expanded="false" aria-label="Abrir menú"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="menuPublico">
+                <div class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                    <a class="nav-link" href="#{request.contextPath}/index.jsp">Inicio</a>
+                    <a class="nav-link" href="#{request.contextPath}/index.jsp#servicios">Servicios</a>
+                    <h:link outcome="/cotizacion" value="Solicitar cotización" styleClass="nav-link" />
+                    <h:link outcome="/admin/login" value="Acceso del personal" styleClass="btn btn-outline-light btn-sm ms-lg-3 px-3" />
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="py-4 py-lg-5 main-content"><div class="container-fluid px-lg-5"><ui:insert name="contenido" /></div></main>
+    <footer class="app-footer py-4 mt-auto"><div class="container-fluid px-lg-5 d-flex flex-wrap justify-content-between gap-2">
+        <span>© SEGURMAR · EML Inversiones &amp; Soluciones Inalámbricas S.A.C.</span>
+        <span>Seguridad electrónica · Redes · Energía</span>
+    </div></footer>
+    <script src="#{request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</h:body>
+</html>

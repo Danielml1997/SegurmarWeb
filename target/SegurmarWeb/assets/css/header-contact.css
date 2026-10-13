@@ -1,0 +1,66 @@
+/* ==========================================================
+   ENCABEZADO DE CONTACTO
+   Archivo independiente para facilitar futuras modificaciones.
+
+   Cambios rápidos:
+   - Tamaño del número principal: --telefono-tamano
+   - Tamaño del icono: --telefono-icono
+   - Separación entre contactos: --contacto-separacion
+   ========================================================== */
+
+:root {
+  --telefono-tamano: 24px;
+  --telefono-icono: 34px;
+  --contacto-separacion: 22px;
+}
+
+/* Separa claramente teléfono, WhatsApp, correo y botón */
+.top-contact-links {
+  column-gap: var(--contacto-separacion) !important;
+  row-gap: 10px !important;
+}
+
+/* Número principal 908 868 523: se conserva sin cambios */
+.top-contact-links .top-phone-primary {
+  font-size: var(--telefono-tamano);
+  gap: 13px;
+  padding: 8px 18px;
+  white-space: nowrap;
+}
+
+.top-phone-primary .phone-contact-icon {
+  width: var(--telefono-icono);
+  height: var(--telefono-icono);
+  flex: 0 0 var(--telefono-icono);
+  color: #ffffff;
+  filter: drop-shadow(0 3px 7px rgba(255, 255, 255, .18));
+}
+
+/* Mantiene los demás contactos separados, sin cambiar su contenido */
+.top-contact-links > a + a {
+  margin-left: 4px;
+}
+
+@media (max-width: 760px) {
+  :root {
+    --telefono-tamano: 17px;
+    --telefono-icono: 25px;
+    --contacto-separacion: 8px;
+  }
+
+  .top-contact-links .top-phone-primary {
+    gap: 7px;
+    padding: 6px 8px;
+  }
+
+  .top-contact-links > a + a {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  :root {
+    --telefono-tamano: 15px;
+    --telefono-icono: 22px;
+  }
+}

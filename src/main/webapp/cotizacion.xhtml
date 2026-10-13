@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core"
+                xmlns:pt="jakarta.faces.passthrough"
+                template="/WEB-INF/templates/plantilla.xhtml">
+    <ui:define name="titulo">Solicitar cotización | SEGURMAR</ui:define>
+    <ui:define name="contenido">
+        <div class="page-heading mb-4"><span class="section-kicker dark">GESTIÓN COMERCIAL</span><h1>Solicitar cotización</h1><p>Cuéntanos sobre tu proyecto y uno de nuestros asesores atenderá tu solicitud.</p></div>
+        <div class="row justify-content-center g-4">
+            <div class="col-lg-8 col-xl-7">
+                <div class="surface-card p-4 p-md-5">
+                    <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-4"><div><h2 class="h4 fw-bold mb-1">Datos del requerimiento</h2><p class="text-muted mb-0">Los campos marcados con * son obligatorios.</p></div><span class="badge rounded-pill text-bg-primary p-2">Atención personalizada</span></div>
+                    <h:form id="formCotizacion" prependId="true">
+                        <h:messages globalOnly="true" layout="list" styleClass="alert alert-danger list-unstyled" />
+                        <div class="row g-3">
+                            <div class="col-md-6"><h:outputLabel for="nombre" value="Nombre o empresa *" styleClass="form-label fw-semibold" />
+                                <h:inputText id="nombre" value="#{cotizacionBean.nombre}" required="true" requiredMessage="Ingresa tu nombre o empresa." styleClass="form-control" pt:placeholder="Ej. Empresa ABC" maxlength="180">
+                                    <f:validateLength minimum="2" maximum="180" />
+                                </h:inputText><h:message for="nombre" styleClass="text-danger small" /></div>
+                            <div class="col-md-6"><h:outputLabel for="telefono" value="Teléfono *" styleClass="form-label fw-semibold" />
+                                <h:inputText id="telefono" value="#{cotizacionBean.telefono}" required="true" requiredMessage="Ingresa un teléfono." styleClass="form-control" pt:type="tel" pt:placeholder="987 654 321" maxlength="30">
+                                    <f:validateRegex pattern="[0-9+() .-]{7,30}" />
+                                </h:inputText><h:message for="telefono" styleClass="text-danger small" /></div>
+                            <div class="col-md-6"><h:outputLabel for="correo" value="Correo electrónico" styleClass="form-label fw-semibold" />
+                                <h:inputText id="correo" value="#{cotizacionBean.correo}" styleClass="form-control" pt:type="email" pt:placeholder="correo@empresa.com" maxlength="254">
+                                    <f:validateLength maximum="254" />
+                                </h:inputText><h:message for="correo" styleClass="text-danger small" /></div>
+                            <div class="col-md-6"><h:outputLabel for="servicio" value="Servicio de interés *" styleClass="form-label fw-semibold" />
+                                <h:selectOneMenu id="servicio" value="#{cotizacionBean.idServicio}" required="true" requiredMessage="Selecciona un servicio." styleClass="form-select">
+                                    <f:selectItem itemLabel="Selecciona un servicio" itemValue="" noSelectionOption="true" />
+                                    <f:selectItems value="#{cotizacionBean.servicios}" var="s" itemValue="#{s.idServicio}" itemLabel="#{s.nombre}" />
+                                </h:selectOneMenu><h:message for="servicio" styleClass="text-danger small" /></div>
+                            <div class="col-12"><h:outputLabel for="descripcion" value="Descripción del proyecto *" styleClass="form-label fw-semibold" />
+                                <h:inputTextarea id="descripcion" value="#{cotizacionBean.mensaje}" rows="5" required="true" requiredMessage="Describe tu proyecto." styleClass="form-control" pt:placeholder="Ubicación, equipos necesarios, objetivo del proyecto...">
+                                    <f:validateLength minimum="10" maximum="5000" />
+                                </h:inputTextarea><h:message for="descripcion" styleClass="text-danger small" /></div>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+                            <h:link outcome="/inicio" value="← Volver" styleClass="btn btn-outline-secondary" />
+                            <h:commandButton id="guardar" action="#{cotizacionBean.registrar}" value="Enviar solicitud →" styleClass="btn btn-primary btn-lg px-4" />
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-xl-3"><div class="side-info"><img src="#{request.contextPath}/assets/images/comercial-cctv.jpg" class="img-fluid rounded-3 mb-3" alt="Servicios de videovigilancia" /><h3 class="h5">¿Qué sucede después?</h3><p>Nuestro equipo revisará tu requerimiento y te contactará para continuar con la cotización.</p><div class="small text-muted">Tu información se utiliza para atender esta solicitud.</div></div></div>
+        </div>
+    </ui:define>
+</ui:composition>

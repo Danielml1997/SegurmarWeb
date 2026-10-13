@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets"
+                xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core"
+                template="/WEB-INF/templates/plantillaAdmin.xhtml">
+    <ui:define name="titulo">Listado de cotizaciones | SEGURMAR</ui:define>
+    <ui:define name="contenido">
+        <div class="d-flex align-items-end justify-content-between flex-wrap gap-3 mb-4">
+            <div class="page-heading mb-0"><span class="section-kicker dark">CONSULTA Y SEGUIMIENTO</span><h1>Solicitudes registradas</h1><p>Consulta, organiza y da seguimiento a los requerimientos comerciales.</p></div>
+            <h:link outcome="/cotizacion" value="+ Nueva cotización" styleClass="btn btn-primary px-4 py-2" />
+        </div>
+        <div class="surface-card p-3 p-lg-4">
+            <h:form id="formListado">
+                <h:messages globalOnly="true" styleClass="list-unstyled alert alert-info mb-3" layout="list" />
+                <div class="row g-2 align-items-end mb-4">
+                    <div class="col-lg-6"><h:outputLabel for="busqueda" value="Buscar por cliente, teléfono, correo o servicio" styleClass="form-label small fw-semibold" /><h:inputText id="busqueda" value="#{listaBean.filtro}" styleClass="form-control" /></div>
+                    <div class="col-lg-3"><h:outputLabel for="estado" value="Filtrar por estado" styleClass="form-label small fw-semibold" /><h:selectOneMenu id="estado" value="#{listaBean.filtroEstado}" styleClass="form-select">
+                        <f:selectItem itemValue="" itemLabel="Todos los estados" /><f:selectItem itemValue="PENDIENTE" itemLabel="Pendiente" /><f:selectItem itemValue="EN PROCESO" itemLabel="En proceso" /><f:selectItem itemValue="ATENDIDA" itemLabel="Atendida" />
+                    </h:selectOneMenu></div>
+                    <div class="col-lg-3 d-flex gap-2"><h:commandButton value="Buscar" action="#{listaBean.filtrar}" styleClass="btn btn-primary flex-fill"><f:ajax execute="@form" render="@form" /></h:commandButton><h:commandButton value="Limpiar" action="#{listaBean.limpiar}" styleClass="btn btn-outline-secondary flex-fill" immediate="true"><f:ajax execute="@this" render="@form" /></h:commandButton></div>
+                </div>
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3"><span class="fw-semibold">Resultados <span class="badge text-bg-primary rounded-pill">#{listaBean.total}</span></span><span class="text-muted small">Página #{listaBean.paginaActual} de #{listaBean.totalPaginas}</span></div>
+                <div class="table-responsive">
+                    <h:dataTable id="tabla" value="#{listaBean.registrosPagina}" var="c" styleClass="table table-hover align-middle mb-0 admin-table" headerClass="table-light" rowClasses="row-light,row-white">
+                        <h:column><f:facet name="header">Código</f:facet><span class="fw-semibold">#<h:outputText value="#{c.idCotizacion}" /></span></h:column>
+                        <h:column><f:facet name="header">Cliente</f:facet><div class="fw-semibold"><h:outputText value="#{c.nombreEmpresa}" /></div><small class="text-muted"><h:outputText value="#{c.correo}" /></small></h:column>
+                        <h:column><f:facet name="header">Teléfono</f:facet><h:outputText value="#{c.telefono}" /></h:column>
+                        <h:column><f:facet name="header">Servicio</f:facet><h:outputText value="#{c.servicio}" /></h:column>
+                        <h:column><f:facet name="header">Proyecto</f:facet><div class="description-cell" title="#{c.descripcionProyecto}"><h:outputText value="#{c.descripcionProyecto}" /></div></h:column>
+                        <h:column><f:facet name="header">Fecha</f:facet><span class="text-nowrap small"><h:outputText value="#{c.fechaFormateada}" /></span></h:column>
+                        <h:column><f:facet name="header">Estado / acción</f:facet>
+                            <h:selectOneMenu value="#{c.estado}" styleClass="form-select form-select-sm min-state">
+                                <f:selectItem itemValue="PENDIENTE" itemLabel="Pendiente" /><f:selectItem itemValue="EN PROCESO" itemLabel="En proceso" /><f:selectItem itemValue="ATENDIDA" itemLabel="Atendida" />
+                            </h:selectOneMenu>
+                            <h:commandButton value="Guardar estado" action="#{listaBean.guardarEstado(c)}" styleClass="btn btn-outline-primary btn-sm mt-2 w-100"><f:ajax execute="@form" render="@form" /></h:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+                <h:panelGroup rendered="#{listaBean.total == 0}" layout="block" styleClass="empty-state text-center p-5"><div class="fs-1">⌕</div><h3 class="h5">No se encontraron solicitudes</h3><p class="text-muted mb-0">Prueba con otro filtro o registra una cotización.</p></h:panelGroup>
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-4 pt-3 border-top">
+                    <span class="small text-muted">Se muestran hasta 8 registros por página.</span>
+                    <div class="btn-group" role="group" aria-label="Paginación">
+                        <h:commandButton value="← Anterior" action="#{listaBean.anterior}" disabled="#{listaBean.primera}" styleClass="btn btn-outline-primary"><f:ajax execute="@this" render="@form" /></h:commandButton>
+                        <h:commandButton value="Siguiente →" action="#{listaBean.siguiente}" disabled="#{listaBean.ultima}" styleClass="btn btn-outline-primary"><f:ajax execute="@this" render="@form" /></h:commandButton>
+                    </div>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>

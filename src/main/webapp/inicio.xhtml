@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="jakarta.faces.facelets" xmlns:h="jakarta.faces.html" template="/WEB-INF/templates/plantilla.xhtml">
+    <ui:define name="titulo">Servicios y cotizaciones | SEGURMAR</ui:define>
+    <ui:define name="contenido">
+        <section class="dashboard-hero p-4 p-lg-5 mb-4"><div class="row align-items-center g-4">
+            <div class="col-lg-8"><span class="section-kicker">SEGURIDAD · CONECTIVIDAD · ENERGÍA</span>
+                <h1 class="display-6 fw-bold mt-3 text-white">Soluciones tecnológicas para proteger y conectar tu organización.</h1>
+                <p class="lead text-white-75 mb-4">Videovigilancia, infraestructura de redes, control de acceso, mantenimiento y energía solar para empresas e instituciones.</p>
+                <h:link outcome="/cotizacion" value="Solicitar una cotización →" styleClass="btn btn-primary btn-lg px-4" />
+            </div><div class="col-lg-4 d-none d-lg-block text-center"><img src="#{request.contextPath}/assets/images/logo-segurmar.png" alt="SEGURMAR" class="img-fluid bg-white rounded-3 p-3" style="max-width:220px" /></div>
+        </div></section>
+        <div class="row g-4"><div class="col-md-6"><div class="feature-panel h-100"><h2 class="h4">Nuestros servicios</h2><p class="text-muted">Diseñamos, instalamos y damos soporte a soluciones de seguridad electrónica y comunicaciones.</p><a href="#{request.contextPath}/index.jsp#servicios" class="btn btn-outline-primary">Conocer servicios</a></div></div>
+        <div class="col-md-6"><div class="feature-panel h-100"><h2 class="h4">¿Tienes un proyecto?</h2><p class="text-muted">Envíanos los detalles y nuestro equipo se pondrá en contacto contigo para evaluar tu requerimiento.</p><h:link outcome="/cotizacion" value="Enviar solicitud" styleClass="btn btn-primary" /></div></div></div>
+    </ui:define>
+</ui:composition>

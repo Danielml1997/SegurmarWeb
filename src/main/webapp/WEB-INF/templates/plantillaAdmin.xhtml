@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="jakarta.faces.html" xmlns:ui="jakarta.faces.facelets" lang="es">
+<h:head>
+    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#0a1930" />
+    <title><ui:insert name="titulo">SEGURMAR | Administración</ui:insert></title>
+    <link rel="icon" href="#{request.contextPath}/assets/images/logo-segurmar.png" />
+    <link rel="stylesheet" href="#{request.contextPath}/assets/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="#{request.contextPath}/assets/css/portal.css" />
+</h:head>
+<h:body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-brand sticky-top shadow-sm">
+        <div class="container-fluid px-xl-5">
+            <h:link outcome="/admin/dashboard" styleClass="navbar-brand d-flex align-items-center gap-2">
+                <img src="#{request.contextPath}/assets/images/logo-segurmar.png" class="app-logo" alt="SEGURMAR" />
+                <span class="brand-subtitle">SEGURMAR <small>ADMINISTRACIÓN</small></span>
+            </h:link>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuAdmin" aria-controls="menuAdmin" aria-expanded="false" aria-label="Abrir menú"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="menuAdmin">
+                <div class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+                    <h:link outcome="/admin/dashboard" value="Resumen" styleClass="nav-link" />
+                    <h:link outcome="/admin/cotizaciones" value="Cotizaciones" styleClass="nav-link" />
+                    <a class="nav-link" href="#{request.contextPath}/index.jsp" target="_blank" rel="noopener noreferrer">Portal público ↗</a>
+                </div>
+                <div class="d-lg-flex align-items-center ms-lg-3 gap-3 mt-2 mt-lg-0">
+                    <span class="text-white-50 small d-block mb-2 mb-lg-0">#{sessionScope.segurmarAdminNombre}</span>
+                    <h:form id="salidaForm"><h:commandButton value="Cerrar sesión" action="#{sesionBean.salir}" styleClass="btn btn-outline-light btn-sm" /></h:form>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <main class="py-4 py-lg-5 main-content"><div class="container-fluid px-lg-5"><ui:insert name="contenido" /></div></main>
+    <footer class="app-footer py-4 mt-auto"><div class="container-fluid px-lg-5 d-flex justify-content-between gap-2 flex-wrap"><span>© SEGURMAR · Gestión comercial</span><span>Área de acceso restringido</span></div></footer>
+    <script src="#{request.contextPath}/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</h:body>
+</html>
